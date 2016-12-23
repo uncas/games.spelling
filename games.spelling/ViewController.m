@@ -37,7 +37,11 @@
     RestService *restService;
     restService = [RestService alloc];
     restService = [restService init];
-    [restService DownloadJson : @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=l7YSboIW6rgQBaavhoF24p6gvHApLaTt2/OX4urNlWYisINNkqsRtQ==&game=spelling" : ^(NSDictionary *result){
+    NSString *apiCode = @"l7YSboIW6rgQBaavhoF24p6gvHApLaTt2/OX4urNlWYisINNkqsRtQ==";
+    NSString *game = @"spelling";
+    NSString *urlString = [NSString stringWithFormat:
+            @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
+    [restService DownloadJson : urlString : ^(NSDictionary *result){
         [self showImage:result[@"imageUrl"]];
     }];
 }
