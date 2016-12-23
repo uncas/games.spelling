@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38593A2F408D7CDD652D1D11 /* RestService.m */; };
 		38593469C3DC87700B8AECDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 385933A60E8D3A43A673F893 /* AppDelegate.m */; };
 		38593646B069668CD0A01351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38593B2E8C410BDE945F815C /* LaunchScreen.storyboard */; };
 		3859395B525D3953A446ED14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38593ED2DE8479394E49EFB9 /* Info.plist */; };
@@ -24,6 +25,8 @@
 		385933A60E8D3A43A673F893 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		385934E75101E678278A8B27 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3859360447416BA80813B00F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		385939557D85687BD6D7FA13 /* RestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestService.h; sourceTree = "<group>"; };
+		38593A2F408D7CDD652D1D11 /* RestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestService.m; sourceTree = "<group>"; };
 		38593E43580D8CFAD9A12F63 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		38593ED2DE8479394E49EFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		38593FF5479F5B7306526374 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,6 +63,8 @@
 				385937B332C8A7B7B64139B2 /* Main.storyboard */,
 				38593E43580D8CFAD9A12F63 /* ViewController.h */,
 				385934E75101E678278A8B27 /* ViewController.m */,
+				38593A2F408D7CDD652D1D11 /* RestService.m */,
+				385939557D85687BD6D7FA13 /* RestService.h */,
 			);
 			path = games.spelling;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				38593DB9CC855387C9C5D709 /* main.m in Sources */,
 				38593469C3DC87700B8AECDF /* AppDelegate.m in Sources */,
 				38593B3D692B4212077A964C /* ViewController.m in Sources */,
+				385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

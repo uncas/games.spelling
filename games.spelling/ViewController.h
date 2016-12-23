@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestService.h"
 
 
 @interface ViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+
 
 @end

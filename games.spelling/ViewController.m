@@ -23,6 +23,7 @@
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:data];
     self.imageView.image = image;
+    [self fetchPictures];
 }
 
 
@@ -31,5 +32,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)fetchPictures;
+{
+    RestService *restService;
+    restService = [RestService alloc];
+    restService = [restService init];
+    [restService DownloadJson : @"https://httpbin.org/get" : ^(NSDictionary *result){
+        [self nextButton].titleLabel.text = result[@"url"];
+    }];
+}
 
 @end
