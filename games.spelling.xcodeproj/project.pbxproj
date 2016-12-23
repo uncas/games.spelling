@@ -10,7 +10,6 @@
 		385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38593A2F408D7CDD652D1D11 /* RestService.m */; };
 		38593469C3DC87700B8AECDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 385933A60E8D3A43A673F893 /* AppDelegate.m */; };
 		38593646B069668CD0A01351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38593B2E8C410BDE945F815C /* LaunchScreen.storyboard */; };
-		3859395B525D3953A446ED14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38593ED2DE8479394E49EFB9 /* Info.plist */; };
 		38593B3D692B4212077A964C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385934E75101E678278A8B27 /* ViewController.m */; };
 		38593B96C98E6205B6388F05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385932A14554165F77D7BDD2 /* Assets.xcassets */; };
 		38593DB9CC855387C9C5D709 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3859360447416BA80813B00F /* main.m */; };
@@ -135,7 +134,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3859395B525D3953A446ED14 /* Info.plist in Resources */,
 				38593B96C98E6205B6388F05 /* Assets.xcassets in Resources */,
 				38593646B069668CD0A01351 /* LaunchScreen.storyboard in Resources */,
 				38593ED180EA025C6D49865A /* Main.storyboard in Resources */,
@@ -300,6 +298,7 @@
 				3859306E61FF057EE2430FA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38593F65BC25D68F92377FB7 /* Build configuration list for PBXProject "games.spelling" */ = {
 			isa = XCConfigurationList;
