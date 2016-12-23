@@ -15,4 +15,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
+- (IBAction)nextTapped:(UIButton *)sender;
+
 @end

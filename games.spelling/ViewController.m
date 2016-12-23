@@ -13,9 +13,13 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    NSArray *_images;
+    int _imageIndex;
+}
 
 - (void)viewDidLoad {
+    _imageIndex = 0;
     [super viewDidLoad];
     [self fetchImages];
 }
@@ -25,6 +29,11 @@
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:data];
     self.imageView.image = image;
+}
+
+- (void)showAnImage {
+    NSDictionary *firstImage = _images[_imageIndex];
+    [self showImage:firstImage[@"imageUrl"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,9 +52,19 @@
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
     [restService DownloadJson : urlString : ^(NSDictionary *result){
         NSArray *images = result[@"images"];
-        NSDictionary *firstImage = images[0];
-        [self showImage:firstImage[@"imageUrl"]];
+        _images = images;
+        [self showAnImage];
     }];
+}
+
+- (IBAction)nextTapped:(UIButton *)sender
+{
+    _imageIndex += 1;
+    if (_imageIndex >= [_images count]){
+        _imageIndex = 0;
+    }
+
+    [self showAnImage];
 }
 
 @end
