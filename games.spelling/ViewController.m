@@ -42,7 +42,9 @@
     NSString *urlString = [NSString stringWithFormat:
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
     [restService DownloadJson : urlString : ^(NSDictionary *result){
-        [self showImage:result[@"imageUrl"]];
+        NSArray *images = result[@"images"];
+        NSDictionary *firstImage = images[0];
+        [self showImage:firstImage[@"imageUrl"]];
     }];
 }
 
