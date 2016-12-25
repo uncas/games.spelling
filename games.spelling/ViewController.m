@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ViewController ()
@@ -17,6 +18,7 @@
     NSArray *_words;
     int _wordIndex;
     NSDictionary *_word;
+    AVAudioPlayer *_audioPlayer;
 }
 
 - (void)viewDidLoad {
@@ -34,7 +36,21 @@
 
 - (void)showAWord {
     _word = _words[_wordIndex];
-    [self showImageFromUrl:_word[@"imageUrl"]];
+    NSString *imageUrl = _word[@"imageUrl"];
+    if ([imageUrl length] > 0) {
+        [self showImageFromUrl:imageUrl];
+    } else {
+        [self playSound:_word[@"soundUrl"]];
+    }
+}
+
+- (void)playSound : (NSString *)urlString{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData* data = [NSData dataWithContentsOfURL:url];
+    NSError *error;
+    _audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,17 +77,15 @@
 {
     NSString *input = self.textView.text;
     NSString *expected = _word[@"word"];
-    if ([input isEqualToString:expected])
-    {
+    if ([input isEqualToString:expected]) {
         self.statusLabel.text = @"Korrekt!";
     }
-    else
-    {
+    else {
         self.statusLabel.text = @"Forkert!";
     }
 
     _wordIndex += 1;
-    if (_wordIndex >= [_words count]){
+    if (_wordIndex >= [_words count]) {
         _wordIndex = 0;
     }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19961BA91E104D4B00D22967 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19961BA81E104D4B00D22967 /* AVFoundation.framework */; };
 		385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38593A2F408D7CDD652D1D11 /* RestService.m */; };
 		38593469C3DC87700B8AECDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 385933A60E8D3A43A673F893 /* AppDelegate.m */; };
 		38593646B069668CD0A01351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38593B2E8C410BDE945F815C /* LaunchScreen.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19961BA81E104D4B00D22967 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3859301CAF6AAF9EE7A46F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3859302B1D0E83EA324715B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3859324CCC1FBEEA81694D44 /* games.spelling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = games.spelling.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,12 +38,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19961BA91E104D4B00D22967 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19961BA71E104D4B00D22967 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19961BA81E104D4B00D22967 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3859311E6E945EB2B70395ED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +92,7 @@
 			children = (
 				385935472A83BC4D739A2F23 /* Products */,
 				385934F6FA4BC99D89E3E1F6 /* games.spelling */,
+				19961BA71E104D4B00D22967 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
