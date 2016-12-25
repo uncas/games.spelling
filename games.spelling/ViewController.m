@@ -42,6 +42,8 @@
     } else {
         [self playSound:_word[@"soundUrl"]];
     }
+
+    [self.textView becomeFirstResponder];
 }
 
 - (void)playSound : (NSString *)urlString{
