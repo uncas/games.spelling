@@ -14,26 +14,27 @@
 @end
 
 @implementation ViewController{
-    NSArray *_images;
-    int _imageIndex;
+    NSArray *_words;
+    int _wordIndex;
+    NSDictionary *_word;
 }
 
 - (void)viewDidLoad {
-    _imageIndex = 0;
+    _wordIndex = 0;
     [super viewDidLoad];
-    [self fetchImages];
+    [self fetchWords];
 }
 
-- (void)showImage: (NSString *)urlString{
+- (void)showImageFromUrl: (NSString *)urlString{
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:data];
     self.imageView.image = image;
 }
 
-- (void)showAnImage {
-    NSDictionary *firstImage = _images[_imageIndex];
-    [self showImage:firstImage[@"imageUrl"]];
+- (void)showAWord {
+    _word = _words[_wordIndex];
+    [self showImageFromUrl:_word[@"imageUrl"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +42,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchImages;
+- (void)fetchWords;
 {
     RestService *restService;
     restService = [RestService alloc];
@@ -51,20 +52,30 @@
     NSString *urlString = [NSString stringWithFormat:
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
     [restService DownloadJson : urlString : ^(NSDictionary *result){
-        NSArray *images = result[@"images"];
-        _images = images;
-        [self showAnImage];
+        _words = result[@"words"];
+        [self showAWord];
     }];
 }
 
 - (IBAction)nextTapped:(UIButton *)sender
 {
-    _imageIndex += 1;
-    if (_imageIndex >= [_images count]){
-        _imageIndex = 0;
+    NSString *input = self.textView.text;
+    NSString *expected = _word[@"word"];
+    if ([input isEqualToString:expected])
+    {
+        self.statusLabel.text = @"Korrekt!";
+    }
+    else
+    {
+        self.statusLabel.text = @"Forkert!";
     }
 
-    [self showAnImage];
+    _wordIndex += 1;
+    if (_wordIndex >= [_words count]){
+        _wordIndex = 0;
+    }
+
+    [self showAWord];
 }
 
 @end
