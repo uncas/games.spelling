@@ -10,7 +10,7 @@
 #import "RestService.h"
 
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;

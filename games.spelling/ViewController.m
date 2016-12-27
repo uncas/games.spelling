@@ -25,6 +25,7 @@
     _wordIndex = 0;
     [super viewDidLoad];
     [self fetchWords];
+    self.textView.delegate = self;
 }
 
 - (void)showImageFromUrl: (NSString *)urlString{
@@ -78,6 +79,10 @@
 
 - (IBAction)nextTapped:(UIButton *)sender
 {
+    [self tryWord];
+}
+
+- (void)tryWord {
     NSString *input = self.textView.text;
     NSString *expected = _word[@"word"];
     if ([input isEqualToString:expected]) {
@@ -93,6 +98,11 @@
     }
 
     [self showAWord];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self tryWord];
+    return NO;
 }
 
 @end
