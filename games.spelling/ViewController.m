@@ -14,7 +14,7 @@
 
 @end
 
-@implementation ViewController{
+@implementation ViewController {
     NSArray *_words;
     int _wordIndex;
     NSDictionary *_word;
@@ -28,7 +28,7 @@
     self.textView.delegate = self;
 }
 
-- (void)showImageFromUrl: (NSString *)urlString{
+- (void)showImageFromUrl:(NSString *)urlString {
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:data];
@@ -48,9 +48,9 @@
     [self.textView becomeFirstResponder];
 }
 
-- (void)playSound : (NSString *)urlString{
+- (void)playSound:(NSString *)urlString {
     NSURL *url = [NSURL URLWithString:urlString];
-    NSData* data = [NSData dataWithContentsOfURL:url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
     NSError *error;
     _audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
     [_audioPlayer prepareToPlay];
@@ -62,8 +62,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchWords;
-{
+- (void)fetchWords; {
     RestService *restService;
     restService = [RestService alloc];
     restService = [restService init];
@@ -71,14 +70,13 @@
     NSString *game = @"spelling";
     NSString *urlString = [NSString stringWithFormat:
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
-    [restService DownloadJson : urlString : ^(NSDictionary *result){
+    [restService DownloadJson:urlString :^(NSDictionary *result) {
         _words = result[@"words"];
         [self showAWord];
     }];
 }
 
-- (IBAction)nextTapped:(UIButton *)sender
-{
+- (IBAction)nextTapped:(UIButton *)sender {
     [self tryWord];
 }
 
@@ -87,8 +85,7 @@
     NSString *expected = _word[@"word"];
     if ([input isEqualToString:expected]) {
         self.statusLabel.text = @"Korrekt!";
-    }
-    else {
+    } else {
         self.statusLabel.text = @"Forkert!";
     }
 
