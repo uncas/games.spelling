@@ -17,5 +17,5 @@
 
 - (int)getPoints;
 
-- (id)goToNextWord;
+- (BOOL)goToNextWord;
 @end

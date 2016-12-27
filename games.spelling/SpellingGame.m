@@ -7,19 +7,17 @@
 
 
 @implementation SpellingGame {
-    NSArray *_words;
-    int _wordIndex;
+    NSMutableArray *_words;
     NSDictionary *_word;
     int _points;
     int _tries;
 }
 
 - (void)loadWords:(NSArray *)words {
-    _words = words;
-    _wordIndex = 0;
+    _words = [[NSMutableArray alloc] initWithArray:words];
     _points = 0;
     _tries = 0;
-    _word = _words[_wordIndex];
+    [self goToNextWord];
 }
 
 - (NSString *)getCurrentImageUrl {
@@ -34,10 +32,15 @@
     _tries++;
     NSString *expected = _word[@"word"];
     BOOL isCorrect = [input isEqualToString:expected];
-    if (isCorrect && _tries == 1)
+    if (isCorrect && _tries == 1) {
         _points += [expected length];
+        [_words removeObject:_word];
+    }
 
-    _tries = 0;
+    if (isCorrect) {
+        _tries = 0;
+    }
+
     return isCorrect;
 }
 
@@ -45,13 +48,13 @@
     return _points;
 }
 
-- (void)goToNextWord {
-    _wordIndex += 1;
-    if (_wordIndex >= [_words count]) {
-        _wordIndex = 0;
-    }
+- (BOOL)goToNextWord {
+    if ([_words count] == 0)
+        return NO;
 
-    _word = _words[_wordIndex];
+    NSUInteger nextIndex = arc4random() % [_words count];
+    _word = _words[nextIndex];
+    return YES;
 }
 
 @end

@@ -108,8 +108,15 @@
 }
 
 - (void)goToNextWord {
-    [_game goToNextWord];
-    [self showAWord];
+    BOOL moreWords = [_game goToNextWord];
+    if (moreWords)
+        [self showAWord];
+    else {
+        NSString *statusText = [NSString stringWithFormat:
+                @"Færdig! Du fik %i points!", _game.getPoints];
+        self.statusLabel.text = statusText;
+        self.nextButton.enabled = NO;
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
