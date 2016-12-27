@@ -101,7 +101,7 @@
     }
 
     NSString *statusText = [NSString stringWithFormat:
-            @"Rigtigt! Du har nu %i points", _game.getPoints];
+            @"Rigtigt! Du har %i points (%i)", _game.getPoints, _game.getWeightedPoints];
     self.statusLabel.text = statusText;
     _buttonGoesToNextWord = YES;
     self.textView.enabled = NO;
@@ -113,7 +113,7 @@
         [self showAWord];
     else {
         NSString *statusText = [NSString stringWithFormat:
-                @"Færdig! Du fik %i points!", _game.getPoints];
+                @"Færdig! Du fik %i points (%i)!", _game.getPoints, _game.getWeightedPoints];
         self.statusLabel.text = statusText;
         self.nextButton.enabled = NO;
     }

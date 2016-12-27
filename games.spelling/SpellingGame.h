@@ -17,5 +17,7 @@
 
 - (int)getPoints;
 
+- (int)getWeightedPoints;
+
 - (BOOL)goToNextWord;
 @end

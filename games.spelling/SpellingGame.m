@@ -11,12 +11,14 @@
     NSDictionary *_word;
     int _points;
     int _tries;
+    int _possiblePoints;
 }
 
 - (void)loadWords:(NSArray *)words {
     _words = [[NSMutableArray alloc] initWithArray:words];
     _points = 0;
     _tries = 0;
+    _possiblePoints = 0;
     [self goToNextWord];
 }
 
@@ -39,6 +41,7 @@
 
     if (isCorrect) {
         _tries = 0;
+        _possiblePoints += [expected length];
     }
 
     return isCorrect;
@@ -46,6 +49,10 @@
 
 - (int)getPoints {
     return _points;
+}
+
+- (int)getWeightedPoints {
+    return (100.0 * _points) / (1.0 * _possiblePoints);
 }
 
 - (BOOL)goToNextWord {
