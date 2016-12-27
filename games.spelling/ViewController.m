@@ -32,6 +32,7 @@
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:data];
     self.imageView.image = image;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)showAWord {
