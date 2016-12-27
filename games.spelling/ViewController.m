@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SpellingGame.h"
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -15,23 +16,16 @@
 @end
 
 @implementation ViewController {
-    NSArray *_words;
-    int _wordIndex;
-    NSDictionary *_word;
     AVAudioPlayer *_audioPlayer;
     BOOL _buttonGoesToNextWord;
-    int _points;
-    int _tries;
+    SpellingGame *_game;
 }
 
 - (void)viewDidLoad {
-    _wordIndex = 0;
     [super viewDidLoad];
     [self fetchWords];
     self.textView.delegate = self;
     _buttonGoesToNextWord = NO;
-    _points = 0;
-    _tries = 0;
 }
 
 - (void)showImageFromUrl:(NSString *)urlString {
@@ -43,8 +37,7 @@
 }
 
 - (void)showAWord {
-    _word = _words[_wordIndex];
-    NSString *imageUrl = _word[@"imageUrl"];
+    NSString *imageUrl = _game.getCurrentImageUrl;
     if ([imageUrl length] > 0) {
         [self showImageFromUrl:imageUrl];
     }
@@ -57,7 +50,7 @@
 }
 
 - (void)playSound {
-    NSString *soundUrl = _word[@"soundUrl"];
+    NSString *soundUrl = _game.getCurrentSoundUrl;
     if ([soundUrl length] > 0) {
         [self playSoundFromUrl:soundUrl];
     }
@@ -84,7 +77,8 @@
     NSString *urlString = [NSString stringWithFormat:
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
     [restService DownloadJson:urlString :^(NSDictionary *result) {
-        _words = result[@"words"];
+        _game = [[SpellingGame alloc] init];
+        [_game loadWords:result[@"words"]];
         [self showAWord];
     }];
 }
@@ -98,31 +92,23 @@
 }
 
 - (void)tryWord {
-    _tries += 1;
     NSString *input = self.textView.text;
-    NSString *expected = _word[@"word"];
-    if (![input isEqualToString:expected]) {
+    BOOL isCorrect = [_game tryWord:input];
+    if (!isCorrect) {
         self.statusLabel.text = @"Forkert! Prøv igen!";
         [self playSound];
         return;
     }
 
-    if (_tries == 1)
-        _points += [expected length];
     NSString *statusText = [NSString stringWithFormat:
-            @"Rigtigt! Du har nu %i points", _points];
+            @"Rigtigt! Du har nu %i points", _game.getPoints];
     self.statusLabel.text = statusText;
     _buttonGoesToNextWord = YES;
     self.textView.enabled = NO;
-    _tries = 0;
 }
 
 - (void)goToNextWord {
-    _wordIndex += 1;
-    if (_wordIndex >= [_words count]) {
-        _wordIndex = 0;
-    }
-
+    [_game goToNextWord];
     [self showAWord];
 }
 
