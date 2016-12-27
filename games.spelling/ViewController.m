@@ -43,16 +43,23 @@
     NSString *imageUrl = _word[@"imageUrl"];
     if ([imageUrl length] > 0) {
         [self showImageFromUrl:imageUrl];
-    } else {
-        [self playSound:_word[@"soundUrl"]];
     }
 
+    [self playSound];
     self.textView.enabled = YES;
     self.textView.text = @"";
     [self.textView becomeFirstResponder];
+    self.statusLabel.text = @"Stav til ordet...";
 }
 
-- (void)playSound:(NSString *)urlString {
+- (void)playSound {
+    NSString *soundUrl = _word[@"soundUrl"];
+    if ([soundUrl length] > 0) {
+        [self playSoundFromUrl:soundUrl];
+    }
+}
+
+- (void)playSoundFromUrl:(NSString *)urlString {
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [NSData dataWithContentsOfURL:url];
     NSError *error;
@@ -93,6 +100,7 @@
     NSString *expected = _word[@"word"];
     if (![input isEqualToString:expected]) {
         self.statusLabel.text = @"Forkert! Prøv igen!";
+        [self playSound];
         return;
     }
 
