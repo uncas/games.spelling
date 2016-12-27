@@ -6,8 +6,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface RestService : NSObject
-{
+@interface RestService : NSObject {
     void (^_completionHandler)(NSDictionary *result);
 }
 

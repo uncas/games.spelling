@@ -11,7 +11,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-- (void)DownloadJson : (NSString *)urlString : (void(^)(NSDictionary*))handler {
+- (void)DownloadJson:(NSString *)urlString : (void(^)(NSDictionary*))handler {
     _completionHandler = [handler copy];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

@@ -12,10 +12,10 @@
 
 @interface ViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
-@property (weak, nonatomic) IBOutlet UITextField *textView;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(nonatomic, strong) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UIButton *nextButton;
+@property(weak, nonatomic) IBOutlet UITextField *textView;
+@property(weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 - (IBAction)nextTapped:(UIButton *)sender;
 

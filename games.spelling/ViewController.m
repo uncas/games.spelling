@@ -20,6 +20,8 @@
     NSDictionary *_word;
     AVAudioPlayer *_audioPlayer;
     BOOL _buttonGoesToNextWord;
+    int _points;
+    int _tries;
 }
 
 - (void)viewDidLoad {
@@ -28,6 +30,8 @@
     [self fetchWords];
     self.textView.delegate = self;
     _buttonGoesToNextWord = NO;
+    _points = 0;
+    _tries = 0;
 }
 
 - (void)showImageFromUrl:(NSString *)urlString {
@@ -74,9 +78,7 @@
 }
 
 - (void)fetchWords; {
-    RestService *restService;
-    restService = [RestService alloc];
-    restService = [restService init];
+    RestService *restService = [[RestService alloc] init];
     NSString *apiCode = @"l7YSboIW6rgQBaavhoF24p6gvHApLaTt2/OX4urNlWYisINNkqsRtQ==";
     NSString *game = @"spelling";
     NSString *urlString = [NSString stringWithFormat:
@@ -96,6 +98,7 @@
 }
 
 - (void)tryWord {
+    _tries += 1;
     NSString *input = self.textView.text;
     NSString *expected = _word[@"word"];
     if (![input isEqualToString:expected]) {
@@ -104,9 +107,14 @@
         return;
     }
 
-    self.statusLabel.text = @"Rigtigt!";
+    if (_tries == 1)
+        _points += [expected length];
+    NSString *statusText = [NSString stringWithFormat:
+            @"Rigtigt! Du har nu %i points", _points];
+    self.statusLabel.text = statusText;
     _buttonGoesToNextWord = YES;
     self.textView.enabled = NO;
+    _tries = 0;
 }
 
 - (void)goToNextWord {
