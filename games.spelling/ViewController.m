@@ -19,6 +19,7 @@
     int _wordIndex;
     NSDictionary *_word;
     AVAudioPlayer *_audioPlayer;
+    BOOL _buttonGoesToNextWord;
 }
 
 - (void)viewDidLoad {
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     [self fetchWords];
     self.textView.delegate = self;
+    _buttonGoesToNextWord = NO;
 }
 
 - (void)showImageFromUrl:(NSString *)urlString {
@@ -45,6 +47,8 @@
         [self playSound:_word[@"soundUrl"]];
     }
 
+    self.textView.enabled = YES;
+    self.textView.text = @"";
     [self.textView becomeFirstResponder];
 }
 
@@ -77,18 +81,27 @@
 }
 
 - (IBAction)nextTapped:(UIButton *)sender {
-    [self tryWord];
+    if (_buttonGoesToNextWord) {
+        [self goToNextWord];
+        _buttonGoesToNextWord = NO;
+    } else
+        [self tryWord];
 }
 
 - (void)tryWord {
     NSString *input = self.textView.text;
     NSString *expected = _word[@"word"];
-    if ([input isEqualToString:expected]) {
-        self.statusLabel.text = @"Korrekt!";
-    } else {
-        self.statusLabel.text = @"Forkert!";
+    if (![input isEqualToString:expected]) {
+        self.statusLabel.text = @"Forkert! Prøv igen!";
+        return;
     }
 
+    self.statusLabel.text = @"Rigtigt!";
+    _buttonGoesToNextWord = YES;
+    self.textView.enabled = NO;
+}
+
+- (void)goToNextWord {
     _wordIndex += 1;
     if (_wordIndex >= [_words count]) {
         _wordIndex = 0;
