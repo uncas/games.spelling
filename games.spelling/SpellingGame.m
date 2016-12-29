@@ -36,12 +36,12 @@
     BOOL isCorrect = [input isEqualToString:expected];
     if (isCorrect && _tries == 1) {
         _points += [expected length];
-        [_words removeObject:_word];
     }
 
     if (isCorrect) {
         _tries = 0;
         _possiblePoints += [expected length];
+        [_words removeObject:_word];
     }
 
     return isCorrect;
