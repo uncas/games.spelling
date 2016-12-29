@@ -95,7 +95,20 @@
     NSString *input = self.textView.text;
     BOOL isCorrect = [_game tryWord:input];
     if (!isCorrect) {
-        self.statusLabel.text = @"Forkert! Prøv igen!";
+        switch (_game.getTries) {
+            case 1:
+                self.statusLabel.text = @"Forkert! Prøv igen!";
+                break;
+            case 2:
+                self.statusLabel.text = [NSString stringWithFormat:
+                        @"Forkert! Prøv '%@'", _game.getPattern];
+                break;
+            default:
+                self.statusLabel.text = [NSString stringWithFormat:
+                        @"Forkert! Prøv '%@'", _game.getWord];
+                break;
+        }
+
         [self playSound];
         return;
     }

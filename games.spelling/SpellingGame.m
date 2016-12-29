@@ -12,6 +12,8 @@
     int _points;
     int _tries;
     int _possiblePoints;
+    NSString *_wordString;
+    NSString *_wordAttempt;
 }
 
 - (void)loadWords:(NSArray *)words {
@@ -32,8 +34,9 @@
 
 - (BOOL)tryWord:(NSString *)input {
     _tries++;
-    NSString *expected = _word[@"word"];
+    NSString *expected = _wordString;
     BOOL isCorrect = [input isEqualToString:expected];
+    _wordAttempt = input;
     if (isCorrect && _tries == 1) {
         _points += [expected length];
     }
@@ -51,6 +54,10 @@
     return _points;
 }
 
+- (int)getTries {
+    return _tries;
+}
+
 - (int)getWeightedPoints {
     return (100.0 * _points) / (1.0 * _possiblePoints);
 }
@@ -61,7 +68,20 @@
 
     NSUInteger nextIndex = arc4random() % [_words count];
     _word = _words[nextIndex];
+    _wordString = _word[@"word"];
     return YES;
 }
 
+- (NSString *)getPattern {
+    NSString *output = @"";
+    for (int i = 0; i < _wordString.length; ++i) {
+        output = [NSString stringWithFormat:@"%@*", output];
+    }
+
+    return output;
+}
+
+- (NSString *)getWord {
+    return _wordString;
+}
 @end

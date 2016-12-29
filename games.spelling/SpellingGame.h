@@ -7,6 +7,7 @@
 
 
 @interface SpellingGame : NSObject
+
 - (void)loadWords:(NSArray *)words;
 
 - (NSString *)getCurrentImageUrl;
@@ -17,7 +18,13 @@
 
 - (int)getPoints;
 
+- (int)getTries;
+
 - (int)getWeightedPoints;
 
 - (BOOL)goToNextWord;
+
+- (NSString *)getPattern;
+
+- (NSString *)getWord;
 @end
