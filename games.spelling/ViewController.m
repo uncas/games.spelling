@@ -100,9 +100,10 @@
         return;
     }
 
-    NSString *statusText = [NSString stringWithFormat:
-            @"Rigtigt! Du har %i points (%i)", _game.getPoints, _game.getWeightedPoints];
-    self.statusLabel.text = statusText;
+    NSString *pointsText = [NSString stringWithFormat:
+            @"Points: %i (%i %%)", _game.getPoints, _game.getWeightedPoints];
+    self.statusLabel.text = @"Rigtigt!";
+    self.pointsLabel.text = pointsText;
     _buttonGoesToNextWord = YES;
     self.textView.enabled = NO;
 }
@@ -112,9 +113,7 @@
     if (moreWords)
         [self showAWord];
     else {
-        NSString *statusText = [NSString stringWithFormat:
-                @"Færdig! Du fik %i points (%i)!", _game.getPoints, _game.getWeightedPoints];
-        self.statusLabel.text = statusText;
+        self.statusLabel.text = @"Færdig";
         self.nextButton.enabled = NO;
     }
 }

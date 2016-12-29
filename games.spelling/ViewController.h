@@ -16,6 +16,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *nextButton;
 @property(weak, nonatomic) IBOutlet UITextField *textView;
 @property(weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(weak, nonatomic) IBOutlet UILabel *pointsLabel;
 
 - (IBAction)nextTapped:(UIButton *)sender;
 
