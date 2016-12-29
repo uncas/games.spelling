@@ -75,7 +75,17 @@
 - (NSString *)getPattern {
     NSString *output = @"";
     for (int i = 0; i < _wordString.length; ++i) {
-        output = [NSString stringWithFormat:@"%@*", output];
+        unichar expectedCharacter = [_wordString characterAtIndex:i];
+        if (_wordAttempt.length <= i) {
+            output = [NSString stringWithFormat:@"%@*", output];
+            continue;
+        }
+
+        unichar attemptedCharacter = [_wordAttempt characterAtIndex:i];
+        if (attemptedCharacter == expectedCharacter)
+            output = [NSString stringWithFormat:@"%@%c", output, expectedCharacter];
+        else
+            output = [NSString stringWithFormat:@"%@*", output];
     }
 
     return output;
