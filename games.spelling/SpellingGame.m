@@ -24,10 +24,6 @@
     [self goToNextWord];
 }
 
-- (NSString *)getCurrentSoundUrl {
-    return _word.soundUrl;
-}
-
 - (BOOL)tryWord:(NSString *)input {
     _tries++;
     NSString *expected = _word.word;
@@ -92,6 +88,10 @@
 
 - (NSData *)getCurrentImageData {
     return [self getDataFromUrlString:_word.imageUrl];
+}
+
+- (NSData *)getCurrentSoundData {
+    return [self getDataFromUrlString:_word.soundUrl];
 }
 
 - (NSData *)getDataFromUrlString:(NSString *)urlString {

@@ -49,17 +49,12 @@
 }
 
 - (void)playSound {
-    NSString *soundUrl = _game.getCurrentSoundUrl;
-    if ([soundUrl length] > 0) {
-        [self playSoundFromUrl:soundUrl];
-    }
-}
+    NSData *soundData = _game.getCurrentSoundData;
+    if(!soundData)
+        return;
 
-- (void)playSoundFromUrl:(NSString *)urlString {
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSData *data = [NSData dataWithContentsOfURL:url];
     NSError *error;
-    _audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
+    _audioPlayer = [[AVAudioPlayer alloc] initWithData:soundData error:&error];
     [_audioPlayer prepareToPlay];
     [_audioPlayer play];
 }
