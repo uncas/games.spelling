@@ -29,20 +29,18 @@
     _buttonGoesToNextWord = NO;
 }
 
-- (void)showImageFromUrl:(NSString *)urlString {
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:data];
+- (void)showImage {
+    NSData *imageData = _game.getCurrentImageData;
+    if (!imageData)
+        return;
+
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
     self.imageView.image = image;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)showAWord {
-    NSString *imageUrl = _game.getCurrentImageUrl;
-    if ([imageUrl length] > 0) {
-        [self showImageFromUrl:imageUrl];
-    }
-
+    [self showImage];
     [self playSound];
     self.textView.enabled = YES;
     self.textView.text = @"";

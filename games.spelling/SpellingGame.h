@@ -10,8 +10,6 @@
 
 - (void)loadWords:(NSArray *)words;
 
-- (NSString *)getCurrentImageUrl;
-
 - (NSString *)getCurrentSoundUrl;
 
 - (BOOL)tryWord:(NSString *)input;
@@ -27,4 +25,6 @@
 - (NSString *)getPattern;
 
 - (NSString *)getWord;
+
+- (NSData *)getCurrentImageData;
 @end

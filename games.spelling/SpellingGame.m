@@ -24,10 +24,6 @@
     [self goToNextWord];
 }
 
-- (NSString *)getCurrentImageUrl {
-    return _word.imageUrl;
-}
-
 - (NSString *)getCurrentSoundUrl {
     return _word.soundUrl;
 }
@@ -92,6 +88,18 @@
 
 - (NSString *)getWord {
     return _word.word;
+}
+
+- (NSData *)getCurrentImageData {
+    return [self getDataFromUrlString:_word.imageUrl];
+}
+
+- (NSData *)getDataFromUrlString:(NSString *)urlString {
+    if (!urlString)
+        return nil;
+
+    NSURL *url = [NSURL URLWithString:urlString];
+    return [[NSData alloc] initWithContentsOfURL:url];
 }
 
 @end
