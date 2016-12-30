@@ -13,27 +13,39 @@
 
 - (void)FetchWords:(void (^)(NSMutableArray<Word *> *))handler {
     _completionHandler = [handler copy];
+    [self checkWhetherWordsAreCached];
+    RestService *restService = [[RestService alloc] init];
+    NSString *apiUrl = [self getApiUrl];
+    [restService DownloadJson:apiUrl :^(NSDictionary *result) {
+        [self addWordsToCache:result];
+        [self returnResult:result];
+    }];
+}
 
-    NSString *cacheFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [cacheFolder stringByAppendingPathComponent:@"SpellingGame-Words.txt"];
+- (void)addWordsToCache:(NSDictionary *)result {
+    NSString *filePath = [self getCacheFilePath];
+    [result writeToFile:filePath atomically:YES];
+}
 
-    // TODO: Check whether words are already in cache
+- (void)checkWhetherWordsAreCached {
+    NSString *filePath = [self getCacheFilePath];
     BOOL isDirectory = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory]) {
         NSDictionary *cachedResult = [NSDictionary dictionaryWithContentsOfFile:filePath];
         [self returnResult:cachedResult];
     }
+}
 
-    RestService *restService = [[RestService alloc] init];
+- (NSString *)getCacheFilePath {
+    NSString *cacheFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    return [cacheFolder stringByAppendingPathComponent:@"SpellingGame-Words.txt"];
+}
+
+- (NSString *)getApiUrl {
     NSString *apiCode = @"l7YSboIW6rgQBaavhoF24p6gvHApLaTt2/OX4urNlWYisINNkqsRtQ==";
     NSString *game = @"spelling";
-    NSString *urlString = [NSString stringWithFormat:
+    return [NSString stringWithFormat:
             @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
-    [restService DownloadJson:urlString :^(NSDictionary *result) {
-        // TODO: Add words to cache
-        [result writeToFile:filePath atomically:YES];
-        [self returnResult:result];
-    }];
 }
 
 - (void)returnResult:(NSDictionary *)result {
