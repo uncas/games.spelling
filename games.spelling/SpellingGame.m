@@ -10,6 +10,11 @@
 @implementation SpellingGame {
     NSMutableArray<Word *> *_words;
     Word *_word;
+    NSData *_imageData;
+    NSData *_soundData;
+    Word *_nextWord;
+    NSData *_nextImageData;
+    NSData *_nextSoundData;
     int _points;
     int _tries;
     int _possiblePoints;
@@ -58,8 +63,21 @@
     if ([_words count] == 0)
         return NO;
 
-    NSUInteger nextIndex = arc4random() % [_words count];
-    _word = _words[nextIndex];
+    if (_nextWord) {
+        _word = _nextWord;
+        _nextWord = nil;
+    } else {
+        NSUInteger wordIndex = arc4random() % [_words count];
+        _word = _words[wordIndex];
+    }
+
+    if ([_words count] > 1) {
+        NSMutableArray *dummy = [[NSMutableArray alloc] initWithArray:_words];
+        [dummy removeObject:_word];
+        NSUInteger nextWordIndex = arc4random() % [dummy count];
+        _nextWord = dummy[nextWordIndex];
+    }
+
     return YES;
 }
 
