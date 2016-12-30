@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SpellingGame.h"
+#import "WordService.h"
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -71,14 +72,10 @@
 }
 
 - (void)fetchWords; {
-    RestService *restService = [[RestService alloc] init];
-    NSString *apiCode = @"l7YSboIW6rgQBaavhoF24p6gvHApLaTt2/OX4urNlWYisINNkqsRtQ==";
-    NSString *game = @"spelling";
-    NSString *urlString = [NSString stringWithFormat:
-            @"https://uncas.azurewebsites.net/api/HttpTriggerJS1?code=%@&game=%@", apiCode, game];
-    [restService DownloadJson:urlString :^(NSDictionary *result) {
+    WordService *wordService = [[WordService alloc] init];
+    [wordService FetchWords:^(NSArray *result) {
         _game = [[SpellingGame alloc] init];
-        [_game loadWords:result[@"words"]];
+        [_game loadWords:result];
         [self showAWord];
     }];
 }
