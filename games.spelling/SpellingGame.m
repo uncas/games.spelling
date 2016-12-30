@@ -67,18 +67,24 @@
         _word = _nextWord;
         _nextWord = nil;
     } else {
-        NSUInteger wordIndex = arc4random() % [_words count];
-        _word = _words[wordIndex];
+        _word = [self getRandomWord:_words];
     }
 
     if ([_words count] > 1) {
-        NSMutableArray *dummy = [[NSMutableArray alloc] initWithArray:_words];
+        NSMutableArray<Word *> *dummy = [[NSMutableArray<Word *> alloc] initWithArray:_words];
         [dummy removeObject:_word];
-        NSUInteger nextWordIndex = arc4random() % [dummy count];
-        _nextWord = dummy[nextWordIndex];
+        _nextWord = [self getRandomWord:dummy];
     }
 
+    _soundData = nil;
+    _imageData = nil;
+
     return YES;
+}
+
+- (Word *)getRandomWord:(NSMutableArray<Word *> *)words {
+    NSUInteger nextWordIndex = arc4random() % [words count];
+    return words[nextWordIndex];
 }
 
 - (NSString *)getPattern {
@@ -105,11 +111,17 @@
 }
 
 - (NSData *)getCurrentImageData {
-    return [self getDataFromUrlString:_word.imageUrl];
+    if (!_imageData)
+        _imageData = [self getDataFromUrlString:_word.imageUrl];
+
+    return _imageData;
 }
 
 - (NSData *)getCurrentSoundData {
-    return [self getDataFromUrlString:_word.soundUrl];
+    if (!_soundData)
+        _soundData = [self getDataFromUrlString:_word.soundUrl];
+
+    return _soundData;
 }
 
 - (NSData *)getDataFromUrlString:(NSString *)urlString {
