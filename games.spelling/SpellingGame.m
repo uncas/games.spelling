@@ -22,11 +22,27 @@
 }
 
 - (void)loadWords:(NSMutableArray<Word *> *)words {
-    _words = [[NSMutableArray<Word *> alloc] initWithArray:words];
+    _words = [self takeRandom:words take:10];
     _points = 0;
     _tries = 0;
     _possiblePoints = 0;
     [self goToNextWord];
+}
+
+- (NSMutableArray<Word *> *)takeRandom:(NSMutableArray<Word *> *)words take:(int)take {
+    NSMutableArray<Word *> *pickedWords = [NSMutableArray<Word *> new];
+    int remaining = take;
+    if (words.count >= remaining) {
+        while (remaining > 0) {
+            Word *word = words[arc4random() % words.count];
+            if (![pickedWords containsObject:word]) {
+                [pickedWords addObject:word];
+                remaining--;
+            }
+        }
+    }
+
+    return pickedWords;
 }
 
 - (BOOL)tryWord:(NSString *)input {
