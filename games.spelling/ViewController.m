@@ -46,6 +46,7 @@
     self.textView.text = @"";
     [self.textView becomeFirstResponder];
     self.statusLabel.text = @"Stav til ordet...";
+    [_game preloadNext];
 }
 
 - (void)playSound {

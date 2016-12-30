@@ -27,4 +27,6 @@
 - (NSData *)getCurrentImageData;
 
 - (NSData *)getCurrentSoundData;
+
+- (void)preloadNext;
 @end

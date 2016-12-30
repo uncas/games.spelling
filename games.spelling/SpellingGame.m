@@ -65,9 +65,16 @@
 
     if (_nextWord) {
         _word = _nextWord;
+        _imageData = _nextImageData;
+        _soundData = _nextSoundData;
+
         _nextWord = nil;
+        _nextImageData = nil;
+        _nextSoundData = nil;
     } else {
         _word = [self getRandomWord:_words];
+        _imageData = nil;
+        _soundData = nil;
     }
 
     if ([_words count] > 1) {
@@ -75,9 +82,6 @@
         [dummy removeObject:_word];
         _nextWord = [self getRandomWord:dummy];
     }
-
-    _soundData = nil;
-    _imageData = nil;
 
     return YES;
 }
@@ -130,6 +134,17 @@
 
     NSURL *url = [NSURL URLWithString:urlString];
     return [[NSData alloc] initWithContentsOfURL:url];
+}
+
+- (void)preloadNext {
+    if (!_nextWord)
+        return;
+
+    if (!_nextImageData)
+        _nextImageData = [self getDataFromUrlString:_nextWord.imageUrl];
+
+    if (!_nextSoundData)
+        _nextSoundData = [self getDataFromUrlString:_nextWord.soundUrl];
 }
 
 @end
