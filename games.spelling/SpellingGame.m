@@ -4,20 +4,20 @@
 //
 
 #import "SpellingGame.h"
+#import "Word.h"
 
 
 @implementation SpellingGame {
-    NSMutableArray *_words;
-    NSDictionary *_word;
+    NSMutableArray<Word *> *_words;
+    Word *_word;
     int _points;
     int _tries;
     int _possiblePoints;
-    NSString *_wordString;
     NSString *_wordAttempt;
 }
 
-- (void)loadWords:(NSArray *)words {
-    _words = [[NSMutableArray alloc] initWithArray:words];
+- (void)loadWords:(NSMutableArray<Word *> *)words {
+    _words = [[NSMutableArray<Word *> alloc] initWithArray:words];
     _points = 0;
     _tries = 0;
     _possiblePoints = 0;
@@ -25,16 +25,16 @@
 }
 
 - (NSString *)getCurrentImageUrl {
-    return _word[@"imageUrl"];
+    return _word.imageUrl;
 }
 
 - (NSString *)getCurrentSoundUrl {
-    return _word[@"soundUrl"];
+    return _word.soundUrl;
 }
 
 - (BOOL)tryWord:(NSString *)input {
     _tries++;
-    NSString *expected = _wordString;
+    NSString *expected = _word.word;
     BOOL isCorrect = [input isEqualToString:expected];
     _wordAttempt = input;
     if (isCorrect && _tries == 1) {
@@ -68,14 +68,13 @@
 
     NSUInteger nextIndex = arc4random() % [_words count];
     _word = _words[nextIndex];
-    _wordString = _word[@"word"];
     return YES;
 }
 
 - (NSString *)getPattern {
     NSString *output = @"";
-    for (int i = 0; i < _wordString.length; ++i) {
-        unichar expectedCharacter = [_wordString characterAtIndex:i];
+    for (int i = 0; i < _word.word.length; ++i) {
+        unichar expectedCharacter = [_word.word characterAtIndex:i];
         if (_wordAttempt.length <= i) {
             output = [NSString stringWithFormat:@"%@*", output];
             continue;
@@ -92,6 +91,7 @@
 }
 
 - (NSString *)getWord {
-    return _wordString;
+    return _word.word;
 }
+
 @end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19961BA91E104D4B00D22967 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19961BA81E104D4B00D22967 /* AVFoundation.framework */; };
 		385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 38593A2F408D7CDD652D1D11 /* RestService.m */; };
+		38593342BE2951699DBA7A29 /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = 38593CE59A18ABFB6034EBEA /* Word.m */; };
 		38593469C3DC87700B8AECDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 385933A60E8D3A43A673F893 /* AppDelegate.m */; };
 		38593646B069668CD0A01351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38593B2E8C410BDE945F815C /* LaunchScreen.storyboard */; };
 		38593824D67A1E4F5CBD4BF7 /* SpellingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 385938F3D7394087FD2A07E9 /* SpellingGame.m */; };
@@ -34,6 +35,8 @@
 		385938F3D7394087FD2A07E9 /* SpellingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellingGame.m; sourceTree = "<group>"; };
 		385939557D85687BD6D7FA13 /* RestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestService.h; sourceTree = "<group>"; };
 		38593A2F408D7CDD652D1D11 /* RestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestService.m; sourceTree = "<group>"; };
+		38593CE59A18ABFB6034EBEA /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		38593DEE94D36085D0F93435 /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		38593E43580D8CFAD9A12F63 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		38593ED2DE8479394E49EFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		38593FF5479F5B7306526374 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				38593722894B79D797A8E251 /* SpellingGame.h */,
 				385934821CB8084C5A00A8B6 /* WordService.m */,
 				3859379EF039BAE1B45BB1DA /* WordService.h */,
+				38593CE59A18ABFB6034EBEA /* Word.m */,
+				38593DEE94D36085D0F93435 /* Word.h */,
 			);
 			path = games.spelling;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				385930B4FE7A8CAAE2497C59 /* RestService.m in Sources */,
 				38593824D67A1E4F5CBD4BF7 /* SpellingGame.m in Sources */,
 				38593A3851CF00CBE5AA119A /* WordService.m in Sources */,
+				38593342BE2951699DBA7A29 /* Word.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

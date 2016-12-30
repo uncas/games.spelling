@@ -5,11 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class Word;
+
 
 @interface WordService : NSObject {
-    void (^_completionHandler)(NSArray *result);
+    void (^_completionHandler)(NSMutableArray<Word *> *result);
 }
 
-- (void)FetchWords:(void (^)(NSArray *))handler;
+- (void)FetchWords:(void (^)(NSMutableArray<Word *> *))handler;
 
 @end

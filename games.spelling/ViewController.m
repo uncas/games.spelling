@@ -73,7 +73,7 @@
 
 - (void)fetchWords; {
     WordService *wordService = [[WordService alloc] init];
-    [wordService FetchWords:^(NSArray *result) {
+    [wordService FetchWords:^(NSMutableArray<Word *> *result) {
         _game = [[SpellingGame alloc] init];
         [_game loadWords:result];
         [self showAWord];
